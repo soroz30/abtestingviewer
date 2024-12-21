@@ -64,7 +64,7 @@
                 const sessionsResponse = await fetch('https://a-btesting.onrender.com/sessions');
                 const sessions = await sessionsResponse.json();
 
-                const subscribersResponse = await fetch('https://a-btesting.onrender.com/subscribers');
+                const subscribersResponse = await fetch('http://localhost:3000/subscribers');
                 const subscribers = await subscribersResponse.json();
 
                 const sessionsTable = document.getElementById('sessions-table').querySelector('tbody');
@@ -82,12 +82,11 @@
 
                 const subscribersTable = document.getElementById('subscribers-table').querySelector('tbody');
                 subscribers.forEach(subscriber => {
-                  console.log(subscriber)
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${subscriber.id}</td>
-                        <td>${subscriber.session.uniqueId}</td>
-                        <td>${subscriber.session.scenario}</td>
+                        <td>${subscriber.session ? subscriber.session.uniqueId : ""}</td>
+                        <td>${subscriber.session ? subscriber.session.scenario : ""}</td>
                         <td>${new Date(subscriber.createdAt).toLocaleString()}</td>
                     `;
                     subscribersTable.appendChild(row);
