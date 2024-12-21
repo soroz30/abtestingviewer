@@ -64,7 +64,7 @@
                 const sessionsResponse = await fetch('https://a-btesting.onrender.com/sessions');
                 const sessions = await sessionsResponse.json();
 
-                const subscribersResponse = await fetch('http://localhost:3000/subscribers');
+                const subscribersResponse = await fetch('https://a-btesting.onrender.com/subscribers');
                 const subscribers = await subscribersResponse.json();
 
                 const sessionsTable = document.getElementById('sessions-table').querySelector('tbody');
