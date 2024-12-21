@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions and Subscribers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Malewicz Sessions and Subscribers</h1>
+
+    <h2>Sessions</h2>
+    <table id="sessions-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Unique ID</th>
+                <th>Scenario</th>
+                <th>Subscriber ID</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Sesje zostaną tutaj wstawione -->
+        </tbody>
+    </table>
+
+    <h2>Subscribers</h2>
+    <table id="subscribers-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Session ID</th>
+                <th>Scenario</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Subskrypcje zostaną tutaj wstawione -->
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchData() {
+            try {
+                const sessionsResponse = await fetch('https://a-btesting.onrender.com/sessions');
+                const sessions = await sessionsResponse.json();
+
+                const subscribersResponse = await fetch('https://a-btesting.onrender.com/subscribers');
+                const subscribers = await subscribersResponse.json();
+
+                const sessionsTable = document.getElementById('sessions-table').querySelector('tbody');
+                sessions.forEach(session => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${session.id}</td>
+                        <td>${session.uniqueId}</td>
+                        <td>${session.scenario}</td>
+                        <td>${session.subscriber ? session.subscriber.id : 'None'}</td>
+                        <td>${new Date(session.createdAt).toLocaleString()}</td>
+                    `;
+                    sessionsTable.appendChild(row);
+                });
+
+                const subscribersTable = document.getElementById('subscribers-table').querySelector('tbody');
+                subscribers.forEach(subscriber => {
+                  console.log(subscriber)
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${subscriber.id}</td>
+                        <td>${subscriber.session.uniqueId}</td>
+                        <td>${subscriber.session.scenario}</td>
+                        <td>${new Date(subscriber.createdAt).toLocaleString()}</td>
+                    `;
+                    subscribersTable.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>
