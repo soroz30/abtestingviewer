@@ -25,6 +25,26 @@
     </style>
 </head>
 <body>
+    <h2>Malewicz Stats</h2>
+    <div id="malewicz-stats">
+        <p>Total Views: <span id="malewicz-total-views"></span></p>
+        <p>Total Clicks: <span id="malewicz-total-clicks"></span></p>
+        <p>Scenario A Views: <span id="malewicz-scenario-a-views"></span></p>
+        <p>Scenario B Views: <span id="malewicz-scenario-b-views"></span></p>
+        <p>Scenario A Clicks: <span id="malewicz-scenario-a-clicks"></span></p>
+        <p>Scenario B Clicks: <span id="malewicz-scenario-b-clicks"></span></p>
+    </div>
+
+    <h2>Wave Stats</h2>
+    <div id="wave-stats">
+        <p>Total Views: <span id="wave-total-views"></span></p>
+        <p>Total Clicks: <span id="wave-total-clicks"></span></p>
+        <p>Scenario A Views: <span id="wave-scenario-a-views"></span></p>
+        <p>Scenario B Views: <span id="wave-scenario-b-views"></span></p>
+        <p>Scenario A Clicks: <span id="wave-scenario-a-clicks"></span></p>
+        <p>Scenario B Clicks: <span id="wave-scenario-b-clicks"></span></p>
+    </div>
+
     <h1>Malewicz Sessions and Subscribers</h1>
 
     <h2>Sessions</h2>
@@ -91,6 +111,24 @@
                     `;
                     subscribersTable.appendChild(row);
                 });
+
+                const malewiczStatsResponse = await fetch('https://a-btesting.onrender.com/malewicz-stats');
+                const malewiczStats = await malewiczStatsResponse.json();
+                document.getElementById('malewicz-total-views').textContent = malewiczStats.totalViews;
+                document.getElementById('malewicz-total-clicks').textContent = malewiczStats.totalClicks;
+                document.getElementById('malewicz-scenario-a-views').textContent = malewiczStats.scenarioAViews;
+                document.getElementById('malewicz-scenario-b-views').textContent = malewiczStats.scenarioBViews;
+                document.getElementById('malewicz-scenario-a-clicks').textContent = malewiczStats.totalViews / malewiczStats.scenarioAClicks;
+                document.getElementById('malewicz-scenario-b-clicks').textContent = malewiczStats.totalViews / malewiczStats.scenarioBClicks;
+
+                const waveStatsResponse = await fetch('https://a-btesting.onrender.com/wave-stats');
+                const waveStats = await waveStatsResponse.json();
+                document.getElementById('wave-total-views').textContent = waveStats.totalViews;
+                document.getElementById('wave-total-clicks').textContent = waveStats.totalClicks;
+                document.getElementById('wave-scenario-a-views').textContent = waveStats.scenarioAViews;
+                document.getElementById('wave-scenario-b-views').textContent = waveStats.scenarioBViews;
+                document.getElementById('wave-scenario-a-clicks').textContent = waveStats.totalViews / waveStats.scenarioAClicks;
+                document.getElementById('wave-scenario-b-clicks').textContent = waveStats.totalViews / waveStats.scenarioBClicks;
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
