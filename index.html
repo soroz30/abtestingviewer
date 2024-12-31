@@ -118,8 +118,8 @@
                 document.getElementById('malewicz-total-clicks').textContent = malewiczStats.totalClicks;
                 document.getElementById('malewicz-scenario-a-views').textContent = malewiczStats.scenarioAViews;
                 document.getElementById('malewicz-scenario-b-views').textContent = malewiczStats.scenarioBViews;
-                document.getElementById('malewicz-scenario-a-clicks').textContent = malewiczStats.totalViews / malewiczStats.scenarioAClicks;
-                document.getElementById('malewicz-scenario-b-clicks').textContent = malewiczStats.totalViews / malewiczStats.scenarioBClicks;
+                document.getElementById('malewicz-scenario-a-clicks').textContent = malewiczStats.scenarioAClicks;
+                document.getElementById('malewicz-scenario-b-clicks').textContent = malewiczStats.scenarioBClicks;
 
                 const waveStatsResponse = await fetch('https://a-btesting.onrender.com/wave-stats');
                 const waveStats = await waveStatsResponse.json();
@@ -127,8 +127,8 @@
                 document.getElementById('wave-total-clicks').textContent = waveStats.totalClicks;
                 document.getElementById('wave-scenario-a-views').textContent = waveStats.scenarioAViews;
                 document.getElementById('wave-scenario-b-views').textContent = waveStats.scenarioBViews;
-                document.getElementById('wave-scenario-a-clicks').textContent = waveStats.totalViews / waveStats.scenarioAClicks;
-                document.getElementById('wave-scenario-b-clicks').textContent = waveStats.totalViews / waveStats.scenarioBClicks;
+                document.getElementById('wave-scenario-a-clicks').textContent = waveStats.scenarioAClicks;
+                document.getElementById('wave-scenario-b-clicks').textContent = waveStats.scenarioBClicks;
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
